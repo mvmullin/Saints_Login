@@ -12,17 +12,11 @@
     <div class="navlink"><a href="/signup">Sign up</a></div>
     <div class="navlink"><a href="/about">About</a></div>
   </nav>
-  <section id="signup">
-    <form id="signupForm" name="signupForm" action="/signup" method="POST" class="mainForm">
-      <label for="username">Username: </label>
-      <input id="user" type="text" name="username" placeholder="username"/>
-      <label for="pass">Password: </label>
-      <input id="pass" type="password" name="pass" placeholder="password"/>
-      <label for="pass2">Password: </label>
-      <input id="pass2" type="password" name="pass2" placeholder="retype password"/>
-      <input type="hidden" name="_csrf" value={{csrfToken}} />
-      <a id="signupSubmit" href="#" class="formSubmit">Sign up</a>
-    </form>
+  <section id="about">
+    <div><p>This Domo Maker allows users to create and store their own domos. New users should
+    create an account via the signup page. Returning users can access their accounts through the
+    login page. Once logged in, users can create their own domos with a name, age, and color. Domo information
+    will be stored in a database, and reaccessed next time users login to their accounts.</p></div>
   </section>
   <div id="domoMessage"><img id="speech" src="/assets/img/speech.png" alt="speech box"/>
     <h3><span id="errorMessage"></span></h3><img id="domo" src="assets/img/domo.png" alt="domo"/>

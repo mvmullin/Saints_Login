@@ -13,14 +13,19 @@ const makerPage = (req, res) => {
   });
 };
 
+const aboutPage = (req, res) => {
+  res.render('about2', { csrfToken: req.csrfToken() });
+};
+
 const makeDomo = (req, res) => {
-  if (!req.body.name || !req.body.age) {
-    return res.status(400).json({ error: 'RAWR! Both name and age are required' });
+  if (!req.body.name || !req.body.age || !req.body.color) {
+    return res.status(400).json({ error: 'RAWR! Name, age, and color are required' });
   }
 
   const domoData = {
     name: req.body.name,
     age: req.body.age,
+    color: req.body.color,
     owner: req.session.account._id,
   };
 
@@ -37,4 +42,5 @@ const makeDomo = (req, res) => {
 };
 
 module.exports.makerPage = makerPage;
+module.exports.aboutPage = aboutPage;
 module.exports.make = makeDomo;
