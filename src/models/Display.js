@@ -4,31 +4,38 @@ mongoose.Promise = global.Promise;
 
 const _ = require('underscore');
 
-let DomoModel = {};
+let DisplayModel = {};
 
 // mongoose.Types.ObjectID is a function that
 // converts string ID to real mongo ID
 const convertId = mongoose.Types.ObjectId;
 const setName = name => _.escape(name).trim();
 
-const DomoSchema = new mongoose.Schema({
+const DisplaySchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
     trim: true,
     set: setName,
   },
+  
+  message:{
+    type: String,
+    required:false,
+  },
 
-  age: {
+  score: {
     type: Number,
     min: 0,
     required: true,
+    default: 0,
   },
 
   color: {
     type: String,
     required: true,
     trim: true,
+    default: 'Gray',
   },
 
   owner: {
@@ -43,21 +50,21 @@ const DomoSchema = new mongoose.Schema({
   },
 });
 
-DomoSchema.statics.toAPI = doc => ({
+DisplaySchema.statics.toAPI = doc => ({
   name: doc.name,
-  age: doc.age,
+  message: doc.message,
   color: doc.color,
 });
 
-DomoSchema.statics.findByOwner = (ownerId, callback) => {
+DisplaySchema.statics.findByOwner = (ownerId, callback) => {
   const search = {
     owner: convertId(ownerId),
   };
 
-  return DomoModel.find(search).select('name age color').exec(callback);
+  return DisplayModel.find(search).select('name message score color').exec(callback);
 };
 
-DomoModel = mongoose.model('Domo', DomoSchema);
+DisplayModel = mongoose.model('Display', DisplaySchema);
 
-module.exports.DomoModel = DomoModel;
-module.exports.DomoSchema = DomoSchema;
+module.exports.DisplayModel = DisplayModel;
+module.exports.DisplaySchema = DisplaySchema;

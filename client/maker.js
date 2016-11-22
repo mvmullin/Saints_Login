@@ -25,17 +25,17 @@ $(document).ready(function() {
         });        
     }
     
-    $("#makeDomoSubmit").on("click", (e) => {
+    $("#updateDisplay").on("click", (e) => {
         e.preventDefault();
     
         $("#domoMessage").animate({width:'hide'},350);
     
-        if($("#domoName").val() == '' || $("#domoAge").val() == '') {
+        if($("#displayName").val() == '') {
             handleError("RAWR! All fields are required");
             return false;
         }
 
-        sendAjax($("#domoForm").attr("action"), $("#domoForm").serialize());
+        sendAjax($("#displayForm").attr("action"), $("#displayForm").serialize());
         
         return false;
     });

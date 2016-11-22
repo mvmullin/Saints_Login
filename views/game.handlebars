@@ -1,0 +1,58 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Order of Saints</title>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <link rel="shortcut icon" href="/assets/img/favicon.png"/>
+  <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
+  <script type="text/babel">
+  var score;
+  
+  const increaseScore = () => {
+    score+=10;
+    document.getElementById("score").innerHTML = "Score: " + score;
+  }
+  
+  const sendScore = (e) => {
+    const csrf = document.getElementById("csrf").value;
+    const data = `score=${score}&_csrf=${csrf}`;
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: "/game",
+            data: data,
+            dataType: "json",
+            success: (result, status, xhr) => {
+                
+
+                window.location = result.redirect;
+            },
+            error: (xhr, status, error) => {
+                const messageObj = JSON.parse(xhr.responseText);
+            
+                handleError(messageObj.error);
+            }
+        });        
+    }
+  
+  const init = () => {
+    score = 0;
+    document.getElementById("scoreButton").onclick = increaseScore;
+    document.getElementById("quitButton").onclick = sendScore;
+  }
+  
+  window.onload=init;
+  </script>
+</head>
+<body>
+  <div id="score">Score: </div>
+  <a id="scoreButton" href="#" class="button">Increase Score</a>
+  <a id="quitButton" href="#" class="button">Quit</a>
+  <input id="csrf" type="hidden" name="_csrf" value={{csrfToken}} />
+  <div id="domoMessage"><img id="speech" src="/assets/img/speech.png" alt="speech box"/>
+    <h3><span id="errorMessage"></span></h3><img id="domo" src="assets/img/domo.png" alt="domo"/>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+  <script src="/assets/maker.js" type="text/babel"></script>
+</body>
+</html>

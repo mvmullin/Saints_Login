@@ -1,43 +1,45 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>DomoMaker</title>
+  <title>Order of Saints</title>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <link rel="shortcut icon" href="/assets/img/favicon.png"/>
   <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
 </head>
 <body>
-  <nav><a href="/login"><img id="logo" src="/assets/img/face.png" alt="face logo"/></a>
+  <nav><a href="/login"><img id="logo" src="/assets/img/logo.png" alt="logo"/></a>
     <div class="navlink"><a href="/logout">Log out</a></div>
-    <div class="navlink"><a href="/maker">Domo Maker</a></div>
+    <div class="navlink"><a href="/display">User Display</a></div>
     <div class="navlink"><a href="/about2">About</a></div>
   </nav>
-  <section id="makeDomo">
-    <form id="domoForm" name="domoForm" action="/maker" method="POST" class="domoForm">
+  <section id="editDisplay">
+    <form id="displayForm" name="displayForm" action="/display" method="POST" class="displayForm">
       <label for="name">Name: </label>
-      <input id="domoName" type="text" name="name" placeholder="Domo Name"/>
-      <label for="age">Age: </label>
-      <input id="domoAge" type="text" name="age" placeholder="Domo Age"/>
+      <input id="displayName" type="text" name="name" placeholder="Display Name"/>
+      <label for="message">Message: </label>
+      <input id="displayMessage" type="text" name="message" placeholder="Display Message"/>
       <label for="color">Color: </label>
-      <input id="domoColor" type="text" name="color" placeholder="Domo Color"/>
+      <input id="displayColor" type="text" name="color" placeholder="Display Color"/>
       <input type="hidden" name="_csrf" value={{csrfToken}} />
-      <a id="makeDomoSubmit" href="#" class="makeDomoSubmit">Make Domo</a>
+      <a id="updateDisplay" href="#" class="button">Update Display</a>
     </form>
   </section>
-  <section id="domos">
-    <div class="domo">
-      {{#if domos}}
-        {{#each domos}}
-          <div style="background-color: {{this.color}}" class="domo"><img src="/assets/img/domoface.jpeg" alt="domo face" class="domoFace"/>
-            <h3 class="domoName">Name: {{this.name}}</h3>
-            <h3 class="domoAge">Age: {{this.age}}</h3>
+  <section id="displays">
+    <div class="display">
+      {{#if displays}}
+        {{#each displays}}
+          <div style="background-color: {{this.color}}" class="display">
+            <h3 class="displayName">Name: {{this.name}}</h3>
+            <h3 class="displayMessage">Message: {{this.message}}</h3>
+            <h3 class="displayScore">High Score: {{this.score}}</h3>
           </div>
         {{/each}}
       {{else}}
-        <h3 class="emptyDomo">No Domos yet</h3>
+        <h3 class="emptyDisplay">No Display Yet</h3>
       {{/if}}
     </div>
   </section>
+  <a id="launchGame" href="/game" class="button">Launch Game</a>
   <div id="domoMessage"><img id="speech" src="/assets/img/speech.png" alt="speech box"/>
     <h3><span id="errorMessage"></span></h3><img id="domo" src="assets/img/domo.png" alt="domo"/>
   </div>

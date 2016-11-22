@@ -8,9 +8,11 @@ const router = (app) => {
   app.post('/signup', mid.requiresSecure, mid.requiresLogout, controllers.Account.signup);
   app.get('/about', mid.requiresSecure, mid.requiresLogout, controllers.Account.aboutPage);
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
-  app.get('/about2', mid.requiresLogin, controllers.Domo.aboutPage);
-  app.get('/maker', mid.requiresLogin, controllers.Domo.makerPage);
-  app.post('/maker', mid.requiresLogin, controllers.Domo.make);
+  app.get('/about2', mid.requiresLogin, controllers.Display.aboutPage);
+  app.get('/display', mid.requiresLogin, controllers.Display.displayPage);
+  app.post('/display', mid.requiresLogin, controllers.Display.edit);
+  app.get('/game', mid.requiresLogin, controllers.Display.gamePage);
+  app.post('/game', mid.requiresLogin, controllers.Display.updateScore);
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
 };
 
